@@ -261,7 +261,61 @@
               }
       </script>
   
-  
+<!-- /////////////////// -->
+<!-- /// Adding last update /// -->
+<!-- /////////////////// -->
+
+<div id="last-updated">Loading last update time...</div>
+
+<!-- Verify Button -->
+<button onclick="verifyLastUpdateTime()" style="display: block; margin: 10px auto; padding: 8px 16px;">
+  Verfiy Last Modified Time
+</button>
+
+<script>
+    async function getLastUpdatedTime() {
+        const username = 'FEPSFY6982292';
+        const repo = 'FY6982292';
+
+        const  url = 'hhpts://api.github.com/repo/${username}/${repo}/commits';
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Error fetching data: ${response.status} - ${response.statusText}');
+            }
+
+            const commits = await response.json();
+            if (commits && commits.length > 0) {
+                const lastCommitDate = new Date(commits[0].commit.committer.date);
+
+                // Display the time on load
+                documnet.getElementById('last-updated').innerText = 'Last Modified Time: ${lastCommitDate.toLocalString()}';
+            } else {
+                document.getElementById('last-updated').innerText = 'No commmits found in the repository.';
+            }
+        } catch (error) {
+            console.error('Error fetching the last update time:', error);
+            document.getElementById('last-updated').innerText = 'Error fetching update time. Please check the repository details.';
+        }
+    }
+
+    // Function to verify the last update time by re-fetching it from the API
+    async function verifyLastUpdatedTime() {
+        document.getElementById('last-updated').innerText = 'Verifying...';
+        await getLastUpdatedTime();
+        alert("Last modified time has been successfully verified from Github API.");
+    }
+
+    // Intial load to display the time on page load
+    window.onload = getLastUpdatedTime;
+</script>
+      
     </body>
   
   
