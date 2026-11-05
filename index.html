@@ -269,7 +269,7 @@
 
 <!-- Verify Button -->
 <button onclick="verifyLastUpdateTime()" style="display: block; margin: 10px auto; padding: 8px 16px;">
-  Verfiy Last Modified Time
+  Verify Last Modified Time
 </button>
 
 <script>
@@ -277,7 +277,7 @@
         const username = 'FEPSFY6982292';
         const repo = 'FY6982292';
 
-        const  url = 'hhpts://api.github.com/repo/${username}/${repo}/commits';
+        const  url = 'https://api.github.com/repos/${username}/${repo}/commits';
 
         try {
             const response = await fetch(url, {
