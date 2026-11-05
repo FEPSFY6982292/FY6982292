@@ -295,7 +295,7 @@
                 const lastCommitDate = new Date(commits[0].commit.committer.date);
 
                 // Display the time on load
-                documnet.getElementById('last-updated').innerText = 'Last Modified Time: ${lastCommitDate.toLocalString()}';
+                document.getElementById('last-updated').innerText = 'Last Modified Time: ${lastCommitDate.toLocaleString()}';
             } else {
                 document.getElementById('last-updated').innerText = 'No commmits found in the repository.';
             }
